@@ -51,14 +51,14 @@ COPY --from=node /usr/local/include /usr/local/include
 COPY --from=node /usr/local/share /usr/local/share
 
 # Sync Python dependencies
-COPY pyproject.toml uv.lock site/ ./
+# COPY pyproject.toml uv.lock site/ ./
+COPY . .
 RUN uv sync --locked && \
     uv cache clean && \
     uv cache prune
 
 # Copy Invenio instance
 # Count on .dockerignore to exclude files
-COPY . .
 
 # --- FRONTEND BUILD ---
 ENV INVENIO_WEBPACKEXT_NPM_PKG_CLS=pynpm:PNPMPackage
