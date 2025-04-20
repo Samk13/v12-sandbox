@@ -22,15 +22,15 @@ py-modules = []
 # [tool.uv.sources]
 # v12-sandbox= { path = "site", editable = true }
 
-[tool.uv.sources]
-# You need to lock site/ so the uv sync --lock command works in dockerfile.
-v12-sandbox = [{ path = "./site", editable = true }]
-
 # [tool.uv.sources]
-# v12-sandbox = { workspace = true } # < --- This seems to have a bug
+# You need to lock site/ so the uv sync --lock command works in dockerfile.
+# v12-sandbox = [{ path = "./site", editable = true }]
 
-# [tool.uv.workspace] # < --- This seems to have a bug
-# members = ["site"]
+[tool.uv.sources]
+v12-sandbox = { workspace = true } # < --- This seems to have a bug
+
+[tool.uv.workspace] # < --- This seems to have a bug
+members = ["site"]
 
 [build-system]
 requires = ["hatchling"]
