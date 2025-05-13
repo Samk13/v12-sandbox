@@ -11,7 +11,7 @@ set -euo pipefail
 # ${VAR:+...} expands to nothing if VAR is unset/empty, or substitutes ... if VAR exists
 # For Apple Silicon (M1/M2), /opt/homebrew/lib is the correct Homebrew library path
 # --- Fix for Apple Silicon Homebrew paths ---
-export DYLD_LIBRARY_PATH="/opt/homebrew/lib${DYLD_LIBRARY_PATH:+:$DYLD_LIBRARY_PATH}"
+# export DYLD_LIBRARY_PATH="/opt/homebrew/lib${DYLD_LIBRARY_PATH:+:$DYLD_LIBRARY_PATH}"
 
 
 echo "Installing dev packages ..."
@@ -26,8 +26,8 @@ PACKAGES=(
   invenio-app-rdm
   invenio-communities
   invenio-rdm-records
-  invenio-requests
   invenio-search-ui
+  # invenio-requests
   # invenio-vocabularies
 )
 # old invenio-rdm-records==10.9.2
@@ -42,4 +42,4 @@ for package in "${PACKAGES[@]}"; do
   PACKAGE_PATHS+=("$BASE_DIR/$package")
 done
 # Install packages
-uv run invenio-cli packages install "${PACKAGE_PATHS[@]}"
+invenio-cli packages install "${PACKAGE_PATHS[@]}"
